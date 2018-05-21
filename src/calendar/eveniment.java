@@ -52,8 +52,13 @@ public class eveniment {
     return this.ora;
   }
   public void oraset(String a){
-    this.tip=ora;
+    this.tip=a;
   }
-  
+   public String anget(){
+    return this.an;
+  }
+  public void anset(String a){
+    this.an=a;
+  }  
   
 }

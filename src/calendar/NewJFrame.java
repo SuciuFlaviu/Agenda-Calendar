@@ -47,11 +47,6 @@ public class NewJFrame extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         jButton1.setText("Eveniment nou");
@@ -156,6 +151,10 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void update_list(){
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -195,7 +194,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
     }
-private static calendar c= new calendar();
+private  calendar c= new calendar();
 private evn a=new evn();
 private eve b=new eve();
 private Thread one = new Thread() {
@@ -226,6 +225,13 @@ private Thread one = new Thread() {
                 strdata=strdata.replace("/",";");
                 strdata=strdata.replace(":",";");
                 dt=strdata.split(";");
+            }
+         // Verificare si adaugare eveniment nou
+            if(a.operatorGet()){
+                c.add(a.op_eGet().tipget(),a.op_eGet().anget(), a.op_eGet().lunaget(), a.op_eGet().ziget(), a.op_eGet().oraget(), a.op_eGet().titluget(), a.op_eGet().contget());
+                a.operatorSet(false);
+                System.out.println("Obiect adaugat");
+                
             }
         }
         

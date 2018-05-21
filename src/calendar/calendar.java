@@ -23,15 +23,15 @@ public class calendar {
     System.out.println(dt[2]);
     
   }
-  public void add(String tip, String an, String luna, String zi, String ora){
+  public void add(String tip, String an, String luna, String zi, String ora,String titlu,String context){
 
-    this.even.add(new eveniment(tip,an,luna,zi,ora));
+    this.even.add(new eveniment(tip,an,luna,zi,ora,titlu,context));
     
    
   }
   
-  public void set(int id,String tip, String an, String luna, String zi, String ora){
-    even.set(id, new eveniment(tip,an,luna,zi,ora));
+  public void set(int id,String tip, String an, String luna, String zi, String ora,String titlu,String context){
+    even.set(id, new eveniment(tip,an,luna,zi,ora,titlu,context));
   }
   
   /*public static void main(String[] args) {

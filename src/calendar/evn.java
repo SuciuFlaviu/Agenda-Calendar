@@ -207,7 +207,7 @@ public class evn extends javax.swing.JFrame {
             }
         });
     }
-    private Boolean operator;
+    private Boolean operator=false;
     private eveniment op_e;
     public  boolean operatorGet(){
         return this.operator;
