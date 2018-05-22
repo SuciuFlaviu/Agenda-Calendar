@@ -21,7 +21,9 @@ public class evn extends javax.swing.JFrame {
     public evn() {
         initComponents();
         this.setTitle("Adaugare eveniment nou.");
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss"); 	
+    }
+    public void reinit(){
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss"); 	
     Date date = new Date(); 
     String strdata= dateFormat.format(date);
     strdata=strdata.replace(" ",";");
@@ -31,7 +33,8 @@ public class evn extends javax.swing.JFrame {
     this.jComboBox2.setSelectedItem(dt[0]);
     this.jComboBox3.setSelectedIndex(Integer.parseInt(dt[1])-1);
     this.jComboBox4.setSelectedIndex(Integer.parseInt(dt[2])-1);
-    
+    this.jTextArea1.setText("Detalii...");
+    this.jTextField1.setText("Titlu...");
     }
 
     /**

@@ -60,5 +60,8 @@ public class eveniment {
   public void anset(String a){
     this.an=a;
   }  
+  public String cod(){
+      return (this.an+this.luna+this.zi+this.ora.split(":")[0]+this.ora.split(":")[0]);
+  }
   
 }
