@@ -15,5 +15,14 @@ import java.text.*;
  * @author acasa
  */
 public class llist {
-    
+  private List<lev> llev;
+  public llist(){
+    this.llev = new ArrayList<lev>();
+  }
+  public void clear(){
+      this.llev.clear();
+  }
+  public void add(int id, String cod, String titlu){
+      this.llev.add(new lev(id,cod,titlu));
+  }
 }

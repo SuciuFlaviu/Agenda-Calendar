@@ -11,17 +11,14 @@ public class calendar {
   public calendar(){
     this.even = new ArrayList<eveniment>();
   }
-  public void list_ev(String tip){
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:MM:ss"); 	
-    Date date = new Date(); 
-    String strdata= dateFormat.format(date);
-    strdata=strdata.replace(" ",";");
-    strdata=strdata.replace("/",";");
-    strdata=strdata.replace(":",";");
-    System.out.println();
-    String[] dt=strdata.split(";");
-    System.out.println(dt[2]);
-    
+  public eveniment get(int id){
+      return this.even.get(id);
+  }
+  public void remove(int id){
+      this.even.remove(id);
+  }
+  public int size(){
+  return this.even.size();
   }
   public void add(String tip, String an, String luna, String zi, String ora,String titlu,String context){
 

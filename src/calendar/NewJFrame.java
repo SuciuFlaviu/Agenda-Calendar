@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 
 /**
  *
@@ -47,6 +48,7 @@ public class NewJFrame extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
         jButton1.setText("Eveniment nou");
@@ -119,22 +121,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-    a.setVisible(true);// TODO add your handling code here:
-    /*System.out.println("huh ");  
-        while (a.isVisible()==true){
-            try {
-          Thread.sleep(1000);
-        } catch(InterruptedException e) {
-          
-        }
-         
-        }
-         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-         System.out.println("Gata vizibilitate ");  */
+    a.setVisible(true);
+    a.reinit();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -152,7 +140,23 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void update_list(){
+        this.l_list.clear();
+        int i;
+        int j;
+        String[] bstrings;
+        bstrings=new String[this.c.size()];
+        j=0;
+        for (i=0;i<this.c.size();i++){
+            this.l_list.add(i,this.c.get(i).cod(),this.c.get(i).anget()+"/");
+            bstrings[j]=this.c.get(i).ziget()+'/'+this.c.get(i).lunaget()+"/"+this.c.get(i).anget()+" "+this.c.get(i).oraget()+" "+this.c.get(i).titluget();
+        j++;
+        }
         
+        jList1.setModel(new javax.swing.DefaultListModel<String>() {
+            String[] strings = bstrings;
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
     }
     
     /**
@@ -197,7 +201,9 @@ public class NewJFrame extends javax.swing.JFrame {
 private  calendar c= new calendar();
 private evn a=new evn();
 private eve b=new eve();
+private llist l_list=new llist();
 private Thread one = new Thread() {
+    private NewJFrame d;
     public void run() {
         int i=0;
         DateFormat dateFormat;
@@ -231,6 +237,8 @@ private Thread one = new Thread() {
                 c.add(a.op_eGet().tipget(),a.op_eGet().anget(), a.op_eGet().lunaget(), a.op_eGet().ziget(), a.op_eGet().oraget(), a.op_eGet().titluget(), a.op_eGet().contget());
                 a.operatorSet(false);
                 System.out.println("Obiect adaugat");
+                update_list();
+                
                 
             }
         }
