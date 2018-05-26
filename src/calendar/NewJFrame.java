@@ -145,10 +145,11 @@ public class NewJFrame extends javax.swing.JFrame {
         int j;
         String[] bstrings;
         bstrings=new String[this.c.size()];
+        String[] tp={"[ I ]","[O]","[N]"};
         j=0;
         for (i=0;i<this.c.size();i++){
             this.l_list.add(i,this.c.get(i).cod(),this.c.get(i).anget()+"/");
-            bstrings[j]=this.c.get(i).ziget()+'/'+this.c.get(i).lunaget()+"/"+this.c.get(i).anget()+" "+this.c.get(i).oraget()+" "+this.c.get(i).titluget();
+            bstrings[j]=this.c.get(i).ziget()+'/'+this.c.get(i).lunaget()+"/"+this.c.get(i).anget()+" "+tp[Integer.parseInt(c.get(i).tipget())]+" "+this.c.get(i).oraget()+" "+this.c.get(i).titluget();
         j++;
         }
         

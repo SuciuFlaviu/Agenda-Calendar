@@ -172,7 +172,20 @@ public class evn extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
       this.setVisible(false);
-      this.op_e= new eveniment(String.valueOf(jComboBox1.getSelectedIndex()),String.valueOf(jComboBox2.getSelectedIndex()+1),String.valueOf(jComboBox3.getSelectedIndex()+1),String.valueOf(jComboBox4.getSelectedIndex()+1),jComboBox5.getSelectedItem().toString(),jTextField1.getText(),jTextArea1.getText());
+      String tip,an,luna,zi;
+      tip=String.valueOf(jComboBox1.getSelectedIndex());
+      an=String.valueOf(jComboBox2.getSelectedIndex()+2018);
+      if(jComboBox3.getSelectedIndex()+1<10){
+          luna="0"+String.valueOf(jComboBox3.getSelectedIndex()+1);
+      }else{
+          luna=String.valueOf(jComboBox3.getSelectedIndex()+1);
+      }
+      if(jComboBox4.getSelectedIndex()+1<10){
+          zi="0"+String.valueOf(jComboBox4.getSelectedIndex()+1);
+      }else{
+          zi=String.valueOf(jComboBox4.getSelectedIndex()+1);
+      }
+      this.op_e= new eveniment(tip,an,luna,zi,jComboBox5.getSelectedItem().toString(),jTextField1.getText(),jTextArea1.getText());
       this.operator=true;
     }//GEN-LAST:event_jButton1ActionPerformed
   
