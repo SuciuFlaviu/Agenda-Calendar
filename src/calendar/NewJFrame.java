@@ -127,6 +127,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if (jList1.getModel().getSize()>0){
+        c.remove(l_list.get(jList1.getSelectedIndex()).idGet());
+        update_list();
+        }    
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -158,6 +163,9 @@ public class NewJFrame extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        if (jList1.getModel().getSize()>0){
+            jList1.setSelectedIndex(0);
+        }
     }
     
     /**

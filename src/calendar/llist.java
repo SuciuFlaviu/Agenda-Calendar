@@ -25,4 +25,7 @@ public class llist {
   public void add(int id, String cod, String titlu){
       this.llev.add(new lev(id,cod,titlu));
   }
+  public lev get(int i){
+      return llev.get(i);
+  }
 }
