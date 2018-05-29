@@ -17,8 +17,21 @@ public class calendar {
   public void remove(int id){
       this.even.remove(id);
   }
+  public int alarm(String ccod){
+      int i,k=-1;
+      if (this.even.size()>0){
+          for(i=0;i<this.even.size();i++){
+              if(Long.parseLong(this.even.get(i).cod())==Long.parseLong(ccod)){
+                 k=i;
+                 break;
+              }
+          }
+      }
+      return k;
+  }
+  
   public int size(){
-  return this.even.size();
+  return this.even.size(); 
   }
   public void add(String tip, String an, String luna, String zi, String ora,String titlu,String context){
 

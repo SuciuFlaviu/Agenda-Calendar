@@ -5,6 +5,7 @@
  */
 package calendar;
 
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +24,10 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
         this.setTitle("Calendar");
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);  
+        file_load();
+        update_list();
         this.one.start();
         
     }
@@ -129,14 +134,17 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jList1.getModel().getSize()>0){
         c.remove(l_list.get(jList1.getSelectedIndex()).idGet());
+        file_save();
         update_list();
         }    
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //b.setVisible(true);
-
+        b.op_eSet(c.get(l_list.get(jList1.getSelectedIndex()).idGet()));
+        b.idxSet(l_list.get(jList1.getSelectedIndex()).idGet());
+        //jButton2.setEnabled(false);
+        b.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -165,6 +173,11 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         if (jList1.getModel().getSize()>0){
             jList1.setSelectedIndex(0);
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(true);
+        }else{
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);    
         }
     }
     
@@ -210,15 +223,16 @@ public class NewJFrame extends javax.swing.JFrame {
 private  calendar c= new calendar();
 private evn a=new evn();
 private eve b=new eve();
+private Alarm e=new Alarm();
 private llist l_list=new llist();
 private Thread one = new Thread() {
     private NewJFrame d;
     public void run() {
-        int i=0;
+        int i=0,id;
         DateFormat dateFormat;
         Date date;
         String[] dt;
-        String strdata;
+        String strdata,ccod;
         while (1!=2){
             try {
                 
@@ -231,8 +245,8 @@ private Thread one = new Thread() {
             if (i==60){i=0;}
          
          // Citire data si ora
-         if(i==39){
-                dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss"); 	
+            if(i==39){
+                dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 	
                 date = new Date(); 
                 strdata= dateFormat.format(date);
                 System.out.println(strdata);
@@ -240,22 +254,100 @@ private Thread one = new Thread() {
                 strdata=strdata.replace("/",";");
                 strdata=strdata.replace(":",";");
                 dt=strdata.split(";");
+                ccod=dt[0]+dt[1]+dt[2]+dt[3]+dt[4];
+                id=c.alarm(ccod);
+                System.out.println(ccod);
+                if (id!=-1){
+                    e.a_titluset(c.get(id).titluget());
+                    e.a_contset(c.get(id).contget());
+                    e.setVisible(true);
+                    c.remove(id);
+                    update_list();
+                    file_save();
+                }
             }
+            
          // Verificare si adaugare eveniment nou
             if(a.operatorGet()){
                 c.add(a.op_eGet().tipget(),a.op_eGet().anget(), a.op_eGet().lunaget(), a.op_eGet().ziget(), a.op_eGet().oraget(), a.op_eGet().titluget(), a.op_eGet().contget());
                 a.operatorSet(false);
                 System.out.println("Obiect adaugat");
                 update_list();
-                
-                
+                file_save();
+            }
+         // Verificare si editare eveniment selectat    
+             if(b.operatorGet()){
+                c.set(b.idxGet(),b.op_eGet().tipget(),b.op_eGet().anget(), b.op_eGet().lunaget(), b.op_eGet().ziget(), b.op_eGet().oraget(), b.op_eGet().titluget(), b.op_eGet().contget());
+                System.out.println(b.idxGet()+b.op_eGet().tipget()+b.op_eGet().anget()+ b.op_eGet().lunaget()+ b.op_eGet().ziget()+ b.op_eGet().oraget()+ b.op_eGet().titluget()+ b.op_eGet().contget());
+                b.operatorSet(false);
+                System.out.println("Obiect modificat");
+                update_list();
+                file_save();
             }
         }
         
     }  
 };
+public void file_load(){
+        
+        String fileName = "Calendar_db.csv";
+        String[] elem;
+
+        String line = null;
+
+        try {
+
+            FileReader fileReader = 
+                new FileReader(fileName);
 
 
+            BufferedReader bufferedReader = 
+                new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+               elem=line.split("`");
+               c.add(elem[0], elem[1], elem[2], elem[3], elem[4], elem[5], elem[6]);
+            }   
+
+
+            bufferedReader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                fileName + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + fileName + "'");                  
+
+        }
+    }
+    public void file_save(){
+        String fileName = "Calendar_db.csv";
+        int i;
+        if(c.even.size()>0){
+        try {
+            
+            FileWriter fileWriter =new FileWriter(fileName);
+
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            
+            for(i=0;i<c.even.size();i++){
+            bufferedWriter.write(c.get(i).tipget()+"`"+c.get(i).anget()+"`"+c.get(i).lunaget()+"`"+c.get(i).ziget()+"`"+c.get(i).oraget()+"`"+c.get(i).titluget()+"`"+c.get(i).contget());
+            bufferedWriter.newLine();                
+            }
+
+            bufferedWriter.close();
+        }
+        catch(IOException ex) {
+            System.out.println(
+                "Error writing to file '"
+                + fileName + "'");
+        }
+    }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
