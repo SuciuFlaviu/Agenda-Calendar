@@ -23,7 +23,7 @@ public class evn extends javax.swing.JFrame {
         this.setTitle("Adaugare eveniment nou.");
     }
     public void reinit(){
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss"); 	
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 	
     Date date = new Date(); 
     String strdata= dateFormat.format(date);
     strdata=strdata.replace(" ",";");

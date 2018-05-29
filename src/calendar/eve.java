@@ -42,7 +42,6 @@ public class eve extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editare eveniment");
 
         jLabel1.setText("Tip");
@@ -80,6 +79,11 @@ public class eve extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Ok");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,7 +117,7 @@ public class eve extends javax.swing.JFrame {
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
+                        .addGap(247, 247, 247)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -155,6 +159,28 @@ public class eve extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+      String tip,an,luna,zi;
+      tip=String.valueOf(this.jComboBox1.getSelectedIndex());
+      an=String.valueOf(this.jComboBox2.getSelectedIndex()+2018);
+      if(this.jComboBox3.getSelectedIndex()+1<10){
+          luna="0"+String.valueOf(this.jComboBox3.getSelectedIndex()+1);
+      }else{
+          luna=String.valueOf(this.jComboBox3.getSelectedIndex()+1);
+      }
+      if(this.jComboBox4.getSelectedIndex()+1<10){
+          zi="0"+String.valueOf(this.jComboBox4.getSelectedIndex()+1);
+      }else{
+          zi=String.valueOf(this.jComboBox4.getSelectedIndex()+1);
+      }
+      this.op_e=null;
+      this.op_e= new eveniment(tip,an,luna,zi,this.jComboBox5.getSelectedItem().toString(),this.jTextField1.getText(),this.jTextArea1.getText());
+      
+      this.operator=true;
+      this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,7 +215,38 @@ public class eve extends javax.swing.JFrame {
             }
         });
     }
-
+    private Boolean operator=false;
+    private eveniment op_e;
+    private int idx;
+    public  int idxGet(){
+        return this.idx;
+    }
+    public void idxSet(int oper){
+        this.idx=oper;
+    }
+    public  boolean operatorGet(){
+        return this.operator;
+    }
+    public void operatorSet(boolean oper){
+        this.operator=oper;
+    }
+    public eveniment op_eGet(){
+        return op_e;
+    }
+    public void op_eSet(eveniment ppt){
+        this.op_e=ppt;
+    }
+    // Suprascriere functia de vizibilitate
+    public void setVisible(boolean i){
+        super.setVisible(i);
+        jComboBox1.setSelectedIndex(Integer.parseInt(this.op_eGet().tipget()));
+        jComboBox2.setSelectedItem(this.op_eGet().anget());
+        jComboBox3.setSelectedIndex(Integer.parseInt(this.op_eGet().lunaget())-1);
+        jComboBox4.setSelectedIndex(Integer.parseInt(this.op_eGet().ziget())-1);
+        jComboBox5.setSelectedItem(this.op_eGet().oraget());
+        jTextField1.setText(this.op_eGet().titluget());
+        jTextArea1.setText(this.op_eGet().contget());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;

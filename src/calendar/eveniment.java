@@ -61,7 +61,7 @@ public class eveniment {
     this.an=a;
   }  
   public String cod(){
-      return (this.an+this.luna+this.zi+this.ora.split(":")[0]+this.ora.split(":")[0]);
+      return (this.an+this.luna+this.zi+this.ora.split(":")[0]+this.ora.split(":")[1]);
   }
   
 }
